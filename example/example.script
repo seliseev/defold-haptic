@@ -1,0 +1,39 @@
+-- Tap the screen to play the next effect in the list.
+
+local EFFECTS = {
+	{ name = "impact LIGHT", play = function() haptic.impact(haptic.IMPACT_LIGHT) end },
+	{ name = "impact MEDIUM", play = function() haptic.impact(haptic.IMPACT_MEDIUM) end },
+	{ name = "impact HEAVY", play = function() haptic.impact(haptic.IMPACT_HEAVY) end },
+	{ name = "selection", play = function() haptic.selection() end },
+	{ name = "notification SUCCESS", play = function() haptic.notification(haptic.NOTIFICATION_SUCCESS) end },
+	{ name = "notification WARNING", play = function() haptic.notification(haptic.NOTIFICATION_WARNING) end },
+	{ name = "notification ERROR", play = function() haptic.notification(haptic.NOTIFICATION_ERROR) end },
+	{ name = "vibrate 300 ms", play = function() haptic.vibrate(300) end },
+}
+
+local function draw_text(text, y)
+	msg.post("@render:", "draw_debug_text", { text = text, position = vmath.vector3(40, y, 0), color = vmath.vector4(1) })
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.next_index = 1
+	self.last_played = "nothing yet"
+	self.supported = haptic.is_supported()
+	print("haptic.is_supported:", self.supported)
+end
+
+function update(self, dt)
+	draw_text("haptic.is_supported(): " .. tostring(self.supported), 900)
+	draw_text("last played: " .. self.last_played, 860)
+	draw_text("tap to play: " .. EFFECTS[self.next_index].name, 820)
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.pressed then
+		local effect = EFFECTS[self.next_index]
+		effect.play()
+		self.last_played = effect.name
+		self.next_index = self.next_index % #EFFECTS + 1
+	end
+end

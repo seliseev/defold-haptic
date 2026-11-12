@@ -1,0 +1,26 @@
+[bootstrap]
+main_collection = /example/example.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 640
+height = 960
+high_dpi = 1
+
+[project]
+title = Haptic
+
+[library]
+include_dirs = haptic
+
+[input]
+game_binding = /builtins/input/all.input_bindingc
+
+[android]
+minimum_sdk_version = 23
+package = com.defold.haptic.example
+
+[ios]
+bundle_identifier = com.defold.haptic.example

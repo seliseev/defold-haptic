@@ -1,0 +1,6 @@
+name: "HapticExt"
+
+platforms:
+    ios:
+        context:
+            frameworks: ["UIKit", "AudioToolbox"]

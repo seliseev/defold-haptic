@@ -1,0 +1,55 @@
+- name: haptic
+  type: table
+  desc: Haptic feedback for iOS, Android and HTML5. On other platforms every function is a no-op.
+  members:
+
+  - name: is_supported
+    type: function
+    desc: Check whether the device can play haptic feedback.
+    returns:
+    - name: supported
+      type: boolean
+
+  - name: impact
+    type: function
+    desc: Play a single tap, as for a button press or a collision.
+    parameters:
+    - name: style
+      type: number
+      optional: true
+      desc: haptic.IMPACT_LIGHT (default), haptic.IMPACT_MEDIUM or haptic.IMPACT_HEAVY
+
+  - name: notification
+    type: function
+    desc: Play a multi-tap pattern that reports the outcome of an action.
+    parameters:
+    - name: type
+      type: number
+      optional: true
+      desc: haptic.NOTIFICATION_SUCCESS (default), haptic.NOTIFICATION_WARNING or haptic.NOTIFICATION_ERROR
+
+  - name: selection
+    type: function
+    desc: Play the lightest tick, as for scrolling through a picker.
+
+  - name: vibrate
+    type: function
+    desc: Vibrate for a given time. iOS ignores the duration and plays the system vibration.
+    parameters:
+    - name: duration_ms
+      type: number
+      optional: true
+      desc: Duration in milliseconds, 400 by default, capped at 5000
+
+  - name: IMPACT_LIGHT
+    type: number
+  - name: IMPACT_MEDIUM
+    type: number
+  - name: IMPACT_HEAVY
+    type: number
+  - name: NOTIFICATION_SUCCESS
+    type: number
+  - name: NOTIFICATION_WARNING
+    type: number
+  - name: NOTIFICATION_ERROR
+    type: number

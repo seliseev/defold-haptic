@@ -1,0 +1,12 @@
+/.editor_settings
+/.internal
+/build
+/bundle
+.externalToolBuilders
+.DS_Store
+Thumbs.db
+*.pyc
+.project
+.cproject
+builtins
+bob.jar
